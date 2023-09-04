@@ -41,7 +41,7 @@ wss.on('connection', function connection(client){
   var clientData = `{
       "type": "AssignUUID",
       "sender": "Server",
-      "data": ${client.id},
+      "data": ${client.id}
   }`;
 
   client.send(clientData);
@@ -92,7 +92,7 @@ function CreateMatch()
               "type": "StartMatch",
               "sender": "Server",
               "matchId": "${matchId}",
-              "rate": "${rate}",
+              "rate": "${rate}"
             }`;
           
             allClient[i].send(clientData);
