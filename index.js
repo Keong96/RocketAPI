@@ -37,10 +37,11 @@ const wss = new WebSocket.Server({ port:PORT }, () => {
 wss.on('connection', function connection(client){
 
   client.id = uuid();
+
   var clientData = `{
       "type": "AssignUUID",
       "sender": "Server",
-      "data": ${client.id}
+      "data": ${client.id},
   }`;
 
   client.send(clientData);
@@ -102,6 +103,8 @@ function CreateMatch()
           }, 5000 + (rate * 100));
         });
 }
+
+CreateMatch();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
