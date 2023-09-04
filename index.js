@@ -5,9 +5,17 @@ const app = express();
 const PORT = process.env.PORT || 8082;
 require('dotenv').config();
 
-app.listen(PORT, () => {
-  console.log(`listening on ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`listening on ${PORT}`);
+// });
+
+// app.use(cors({ origin: true, credentials: true }))
+// app.use(bodyParser.json({limit: '50mb'}));
+// app.use(bodyParser.urlencoded({ limit: '50mb', extended: false, parameterLimit:50000 }));
+
+// app.get('/', async (req, res) => {
+//     res.status(200).send("OK");
+// })
 
 const config = {
   connectionString:
@@ -17,14 +25,6 @@ const config = {
 const { Client } = require('pg');
 const client = new Client(config);
 client.connect();
-
-app.use(cors({ origin: true, credentials: true }))
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: false, parameterLimit:50000 }));
-
-app.get('/', async (req, res) => {
-    res.status(200).send("OK");
-})
 
 var uuid = require('uuid-random');
 var allClient = [];
