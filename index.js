@@ -47,8 +47,8 @@ wss.on('connection', function connection(client){
   var clientData = `{
     "type": "test",
     "sender": "Server",
-    "data": ${client.id}
-}`;
+    "data": "123"
+  }`;
 
   client.send(clientData);
 
