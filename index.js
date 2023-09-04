@@ -38,16 +38,10 @@ wss.on('connection', function connection(client){
 
   client.id = uuid();
 
-  // var clientData = `{
-  //     "type": "AssignUUID",
-  //     "sender": "Server",
-  //     "data": ${client.id}
-  // }`;
-
   var clientData = `{
-    "type": "test",
+    "type": "AssignUUID",
     "sender": "Server",
-    "data": "123"
+    "id": "${client.id}",
   }`;
 
   client.send(clientData);
