@@ -37,7 +37,8 @@ const wss = new WebSocket.Server({ port:PORT }, () => {
 wss.on('connection', function connection(client){
 
   client.id = "123";
-
+  console.log(client.id);
+  
   var clientData = `{
     "type": "AssignUUID",
     "sender": "Server",
