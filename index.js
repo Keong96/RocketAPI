@@ -36,13 +36,13 @@ const wss = new WebSocket.Server({ port:PORT }, () => {
 
 wss.on('connection', function connection(client){
 
-  client.id = "123";
+  client.id = uuid();
   console.log(client.id);
-  
+
   var clientData = `{
     "type": "AssignUUID",
     "sender": "Server",
-    "id": "${client.id}"
+    "id": "`+client.id+`"
   }`;
 
   client.send(clientData);
