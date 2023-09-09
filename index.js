@@ -19,7 +19,7 @@ require('dotenv').config();
 
 const config = {
   connectionString:
-    "postgres://rocketdb_user:fKTydnqLq5veN4GHMK2rI3hVBxL0HBQz@dpg-cjm60qdk5scs73cvefog-a.singapore-postgres.render.com/rocketdb?ssl=true",
+    "postgres://gameportal_db_user:TnJdfCS9gNV1j1P19fsGp2H14t6qkf1N@dpg-cjrcte61208c73bkhro0-a.singapore-postgres.render.com/gameportal_db?ssl=true",
 };
 
 const { Client } = require('pg');
