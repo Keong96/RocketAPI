@@ -36,18 +36,6 @@ const wss = new WebSocket.Server({ port:PORT }, () => {
 
 wss.on('connection', function connection(client){
 
-  client.id = uuid();
-
-  var clientData = `{
-    "type": "AssignUUID",
-    "sender": "Server",
-    "data": "${client.id}"
-  }`;
-
-  client.send(clientData);
-
-  allClient.push(client);
-
   client.on('close', () => {  
     for(var i = 0; i < allClient.length; i++)
     {              
@@ -64,6 +52,9 @@ wss.on('connection', function connection(client){
 
     switch(dataJSON.type)
     {
+      case "PlayerLogin":
+          PlayerLogin(client, dataJSON.data);
+          break;
       case "PlayerBet":
           PlayerBet(dataJSON.sender, dataJSON.matchId, dataJson.amount);
           break;
@@ -142,4 +133,11 @@ function PlayerFailCollect(sender, matchId)
           
           client.query("UPDATE bet_history SET result = "+ (-betAmount));
         });
+}
+
+function PlayerLogin(client, uid)
+{
+  client.id = uid;
+
+  allClient.push(client);
 }
