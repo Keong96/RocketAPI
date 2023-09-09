@@ -74,7 +74,7 @@ function CreateMatch()
 {
   var rate = Math.floor(Math.random() * 10000) + 100;
 
-  client.query("INSERT INTO matchs (rate, created_on) VALUES ("+rate+", NOW())")
+  client.query("INSERT INTO rocket_matchs (rate, created_on) VALUES ("+rate+", NOW())")
         .then((result) => {
           
           for(var i = 0; i < allClient.length; i++)
@@ -101,37 +101,37 @@ CreateMatch();
 
 function PlayerBet(sender, matchId, amount)
 {
-  client.query("INSERT INTO bet_history (uid, match_id, amount, timestamp) VALUES ("+sender+", "+matchId+", "+amount+", NOW())");
+  client.query("INSERT INTO rocket_bet_history (uid, match_id, amount, timestamp) VALUES ("+sender+", "+matchId+", "+amount+", NOW())");
 }
 
 function PlayerCollect(sender, matchId)
 {
   var currentTimeStamp = Math.floor(Date.now() / 1000);
 
-  client.query("SELECT * FROM matchs WHERE id = "+matchId)
+  client.query("SELECT * FROM rocket_matches WHERE id = "+matchId)
         .then((result) => {
 
           var matchTimestamp = result.rows[0].created_on;
           
-          client.query("SELECT * FROM bet_history WHERE uid = "+sender+" AND match_id = "+matchId)
+          client.query("SELECT * FROM rocket_bet_history WHERE uid = "+sender+" AND match_id = "+matchId)
                 .then((result2) => {
                   
                   var betAmount = result2.rows[0].amount;
                   var winAmount = (currentTimeStamp - matchTimestamp - 5) * betAmount * 0.1;
                   
-                  client.query("UPDATE bet_history SET result = "+winAmount);
+                  client.query("UPDATE rocket_bet_history SET result = "+winAmount);
                 });
         });
 }
 
 function PlayerFailCollect(sender, matchId)
 {
-  client.query("SELECT * FROM bet_history WHERE uid = "+sender+" AND match_id = "+matchId)
+  client.query("SELECT * FROM rocket_bet_history WHERE uid = "+sender+" AND match_id = "+matchId)
         .then((result) => {
     
           var betAmount = result.rows[0].amount;
           
-          client.query("UPDATE bet_history SET result = "+ (-betAmount));
+          client.query("UPDATE rocket_bet_history SET result = "+ (-betAmount));
         });
 }
 
