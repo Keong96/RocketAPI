@@ -74,7 +74,7 @@ function CreateMatch()
 {
   var rate = Math.floor(Math.random() * 10000) + 100;
 
-  client.query("INSERT INTO rocket_matchs (rate, created_on) VALUES ("+rate+", NOW())")
+  client.query("INSERT INTO rocket_matches (rate, created_on) VALUES ("+rate+", NOW())")
         .then((result) => {
           
           for(var i = 0; i < allClient.length; i++)
@@ -140,4 +140,5 @@ function PlayerLogin(client, uid)
   client.id = uid;
 
   allClient.push(client);
+  console.log("Player ID:"+uid);
 }
