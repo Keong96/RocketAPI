@@ -89,6 +89,8 @@ function CreateMatch()
             allClient[i].send(clientData);
           }
 
+          console.log("Current Match : "+matchId);
+
           setInterval(function(){ 
             CreateMatch();
           }, 5000 + (rate * 100));
@@ -140,5 +142,5 @@ function PlayerLogin(client, uid)
   client.id = uid;
 
   allClient.push(client);
-  console.log("Player ID:"+uid);
+  console.log("Player Joined, ID:"+uid);
 }
