@@ -79,6 +79,8 @@ function CreateMatch()
     client.query("INSERT INTO rocket_matches (rate, created_on) VALUES ("+rate+", NOW()) RETURNING id")
           .then((result) => {
             
+            var endTime = Math.floor(date.getTime() / 1000) + (rate * 10);
+
             for(var i = 0; i < allClient.length; i++)
             {
               var clientData = `{
@@ -94,8 +96,12 @@ function CreateMatch()
             console.log("Current Match ID: "+result.rows[0].id);
 
             setTimeout(function(){ 
-              CreateMatch();
-            }, 5000 + (rate * 10));
+              var unixTimeStamp = Math.floor(date.getTime() / 1000);
+
+              if( unixTimeStamp == )
+                CreateMatch();
+
+            }, 1000);
           });
   }
   else
