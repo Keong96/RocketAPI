@@ -98,7 +98,7 @@ function CreateMatch()
             setTimeout(function(){ 
               var unixTimeStamp = Math.floor(date.getTime() / 1000);
 
-              if( unixTimeStamp == )
+              if( unixTimeStamp == endTime)
                 CreateMatch();
 
             }, 1000);
