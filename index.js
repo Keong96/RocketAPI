@@ -91,11 +91,11 @@ function CreateMatch()
               allClient[i].send(clientData);
             }
 
-            console.log("Current Match : "+matchId);
+            console.log("Current Match ID: "+result.rows[0].id);
 
             setTimeout(function(){ 
               CreateMatch();
-            }, 5000 + (rate * 100));
+            }, 5000 + (rate * 10));
           });
   }
   else
