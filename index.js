@@ -79,7 +79,7 @@ function CreateMatch()
     client.query("INSERT INTO rocket_matches (rate, created_on) VALUES ("+rate+", NOW()) RETURNING id")
           .then((result) => {
             
-            var endTime = Math.floor(Date.now() / 1000) + (rate * 10);
+            var endTime = Math.floor(Date.now() / 1000) + (rate * 10) + 5000;
 
             for(var i = 0; i < allClient.length; i++)
             {
@@ -95,7 +95,7 @@ function CreateMatch()
 
             console.log("Current Match ID: "+result.rows[0].id);
 
-            setTimeout(function(){ 
+            setInterval(function(){ 
               var unixTimeStamp = Math.floor(Date.now() / 1000);
 
               if( unixTimeStamp == endTime)
