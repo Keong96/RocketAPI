@@ -72,29 +72,38 @@ wss.on('connection', function connection(client){
 
 function CreateMatch()
 {
-  var rate = Math.floor(Math.random() * 10000) + 100;
+  if(allClient.length > 0)
+  {
+    var rate = Math.floor(Math.random() * 10000) + 100;
 
-  client.query("INSERT INTO rocket_matches (rate, created_on) VALUES ("+rate+", NOW())")
-        .then((result) => {
-          
-          for(var i = 0; i < allClient.length; i++)
-          {
-            var clientData = `{
-              "type": "StartMatch",
-              "sender": "Server",
-              "matchId": "${matchId}",
-              "rate": "${rate}"
-            }`;
-          
-            allClient[i].send(clientData);
-          }
+    client.query("INSERT INTO rocket_matches (rate, created_on) VALUES ("+rate+", NOW())")
+          .then((result) => {
+            
+            for(var i = 0; i < allClient.length; i++)
+            {
+              var clientData = `{
+                "type": "StartMatch",
+                "sender": "Server",
+                "matchId": "${matchId}",
+                "rate": "${rate}"
+              }`;
+            
+              allClient[i].send(clientData);
+            }
 
-          console.log("Current Match : "+matchId);
+            console.log("Current Match : "+matchId);
 
-          setInterval(function(){ 
-            CreateMatch();
-          }, 5000 + (rate * 100));
-        });
+            setInterval(function(){ 
+              CreateMatch();
+            }, 5000 + (rate * 100));
+          });
+  }
+  else
+  {
+    setInterval(function(){ 
+      CreateMatch();
+    }, 5000);
+  }
 }
 
 CreateMatch();
