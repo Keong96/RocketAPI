@@ -93,14 +93,14 @@ function CreateMatch()
 
             console.log("Current Match : "+matchId);
 
-            setInterval(function(){ 
+            setTimeout(function(){ 
               CreateMatch();
             }, 5000 + (rate * 100));
           });
   }
   else
   {
-    setInterval(function(){ 
+    setTimeout(function(){ 
       CreateMatch();
     }, 5000);
   }
