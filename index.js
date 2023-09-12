@@ -97,7 +97,9 @@ function CreateMatch()
 
             setInterval(function(){ 
               var unixTimeStamp = Math.floor(Date.now() / 1000);
-
+              console.log("current = "+unixTimeStamp);
+              console.log("endTime = "+endTime);
+              
               if( unixTimeStamp == endTime)
                 CreateMatch();
 
